@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "id": 1,
+      "title": "Aadhaar Verification (with OTP)",
+      "fields": [
+        {
+          "tag": "input",
+          "type": "text",
+          "name": "ctl00$ContentPlaceHolder1$txtadharno",
+          "id": "ctl00_ContentPlaceHolder1_txtadharno",
+          "class": "form-control",
+          "placeholder": "Your Aadhaar No",
+          "maxlength": "12",
+          "minlength": "",
+          "required": false,
+          "pattern": "",
+          "value": "",
+          "title": "",
+          "autocomplete": "Off",
+          "min": "",
+          "max": "",
+          "step": "",
+          "aria_label": "",
+          "aria_required": "",
+          "aria_describedby": "",
+          "aria_invalid": "",
+          "label": "1. Aadhaar Number/ आधार संख्या",
+          "validation_rules": {
+            "regex_patterns": [
+              "/<![CDATA[\n\nvar Page_ValidationActive = false;\nif (typeof(ValidatorOnLoad) == \"function\") {\n    ValidatorOnLoad();\n}\n\nfunction ValidatorOnSubmit() {\n    if (Page_ValidationActive) {\n        return ValidatorCommonOnSubmit();\n    }\n    else {\n        return true;\n    }\n}\n        Sys.Application.add_init(function() {\n    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {\"FilterType\":2,\"id\":\"ctl00_ContentPlaceHolder1_FilteredTextBoxExtender4\"}, null, null, $get(\"ctl00_ContentPlaceHolder1_txtadharno\"));\n});\n\ndocument.getElementById('ctl00_ContentPlaceHolder1_RequiredFieldValidator3').dispose = function() {\n    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_RequiredFieldValidator3'));\n}\n\ndocument.getElementById('ctl00_ContentPlaceHolder1_RequiredFieldValidator10').dispose = function() {\n    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_RequiredFieldValidator10'));\n}\n\ndocument.getElementById('ctl00_ContentPlaceHolder1_CustomValidator3').dispose = function() {\n    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_CustomValidator3'));\n}\nSys.Application.add_init(function() {\n    $create(Sys.UI._UpdateProgress, {\"associatedUpdatePanelId\":\"ctl00_ContentPlaceHolder1_UpdatePaneldd1\",\"displayAfter\":500,\"dynamicLayout\":true}, null, null, $get(\"ctl00_ContentPlaceHolder1_UpdateProgress4\"));\n});\n/"
+            ],
+            "validation_messages": [
+              "\") {\n    ValidatorOnLoad();\n}\n\nfunction ValidatorOnSubmit() {\n    if (Page_ValidationActive) {\n        return ValidatorCommonOnSubmit();\n    }\n    else {\n        return true;\n    }\n}\n        Sys.Application.add_init(function() {\n    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {\""
+            ]
+          },
+          "visible": true,
+          "enabled": true,
+          "readonly": false
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "name": "ctl00$ContentPlaceHolder1$txtownername",
+          "id": "ctl00_ContentPlaceHolder1_txtownername",
+          "class": "form-control",
+          "placeholder": "Name as per Aadhaar",
+          "maxlength": "100",
+          "minlength": "",
+          "required": false,
+          "pattern": "",
+          "value": "",
+          "title": "",
+          "autocomplete": "Off",
+          "min": "",
+          "max": "",
+          "step": "",
+          "aria_label": "",
+          "aria_required": "",
+          "aria_describedby": "",
+          "aria_invalid": "",
+          "label": "2. Name of Entrepreneur / उद्यमी का नाम",
+          "validation_rules": {
+            "regex_patterns": [
+              "/<![CDATA[\nvar ctl00_ContentPlaceHolder1_RequiredFieldValidator3 = document.all ? document.all[\"ctl00_ContentPlaceHolder1_RequiredFieldValidator3\"] : document.getElementById(\"ctl00_ContentPlaceHolder1_RequiredFieldValidator3\");\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.controltovalidate = \"ctl00_ContentPlaceHolder1_txtadharno\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.focusOnError = \"t\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.errormessage = \"Required\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.display = \"Dynamic\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.validationGroup = \"X\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.evaluationfunction = \"RequiredFieldValidatorEvaluateIsValid\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.initialvalue = \"\";\nvar ctl00_ContentPlaceHolder1_RequiredFieldValidator10 = document.all ? document.all[\"ctl00_ContentPlaceHolder1_RequiredFieldValidator10\"] : document.getElementById(\"ctl00_ContentPlaceHolder1_RequiredFieldValidator10\");\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.controltovalidate = \"ctl00_ContentPlaceHolder1_txtownername\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.focusOnError = \"t\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.errormessage = \"Required\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.display = \"Dynamic\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.validationGroup = \"X\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.evaluationfunction = \"RequiredFieldValidatorEvaluateIsValid\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.initialvalue = \"\";\nvar ctl00_ContentPlaceHolder1_CustomValidator3 = document.all ? document.all[\"ctl00_ContentPlaceHolder1_CustomValidator3\"] : document.getElementById(\"ctl00_ContentPlaceHolder1_CustomValidator3\");\nctl00_ContentPlaceHolder1_CustomValidator3.focusOnError = \"t\";\nctl00_ContentPlaceHolder1_CustomValidator3.errormessage = \"You must Agree Declerations.\";\nctl00_ContentPlaceHolder1_CustomValidator3.display = \"Dynamic\";\nctl00_ContentPlaceHolder1_CustomValidator3.validationGroup = \"X\";\nctl00_ContentPlaceHolder1_CustomValidator3.evaluationfunction = \"CustomValidatorEvaluateIsValid\";\nctl00_ContentPlaceHolder1_CustomValidator3.clientvalidationfunction = \"checkAgreementA\";\n/"
+            ],
+            "validation_messages": [
+              "\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator3.validationGroup = \"",
+              "\";\nctl00_ContentPlaceHolder1_RequiredFieldValidator10.validationGroup = \"",
+              "\";\nctl00_ContentPlaceHolder1_CustomValidator3.validationGroup = \"",
+              "\";\nctl00_ContentPlaceHolder1_CustomValidator3.clientvalidationfunction = \""
+            ]
+          },
+          "visible": true,
+          "enabled": true,
+          "readonly": false
+        },
+        {
+          "tag": "input",
+          "type": "checkbox",
+          "name": "ctl00$ContentPlaceHolder1$chkDecarationA",
+          "id": "ctl00_ContentPlaceHolder1_chkDecarationA",
+          "class": "",
+          "placeholder": "",
+          "maxlength": "",
+          "minlength": "",
+          "required": false,
+          "pattern": "",
+          "value": "",
+          "title": "",
+          "autocomplete": "",
+          "min": "",
+          "max": "",
+          "step": "",
+          "aria_label": "",
+          "aria_required": "",
+          "aria_describedby": "",
+          "aria_invalid": "",
+          "label": "",
+          "validation_rules": {},
+          "visible": true,
+          "enabled": true,
+          "readonly": false
+        },
+        {
+          "tag": "input",
+          "type": "submit",
+          "name": "ctl00$ContentPlaceHolder1$btnValidateAadhaar",
+          "id": "ctl00_ContentPlaceHolder1_btnValidateAadhaar",
+          "class": "btn btn-primary",
+          "placeholder": "",
+          "maxlength": "",
+          "minlength": "",
+          "required": false,
+          "pattern": "",
+          "value": "Validate & Generate OTP",
+          "title": "",
+          "autocomplete": "",
+          "min": "",
+          "max": "",
+          "step": "",
+          "aria_label": "",
+          "aria_required": "",
+          "aria_describedby": "",
+          "aria_invalid": "",
+          "label": "",
+          "validation_rules": {},
+          "visible": true,
+          "enabled": true,
+          "readonly": false
+        }
+      ]
+    }
+  ]
+}

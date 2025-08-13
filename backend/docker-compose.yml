@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: udyam-postgres
+    environment:
+      POSTGRES_DB: udyam_registration
+      POSTGRES_USER: udyam_user
+      POSTGRES_PASSWORD: udyam_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U udyam_user -d udyam_registration"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API (uncomment when ready to use Docker)
+  # api:
+  #   build: .
+  #   container_name: udyam-api
+  #   environment:
+  #     DATABASE_URL: postgresql://udyam_user:udyam_password@postgres:5432/udyam_registration
+  #     SCHEMA_PATH: ../scraped/real_credentials_schema.json
+  #     NODE_ENV: production
+  #     PORT: 8000
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   volumes:
+  #     - ../scraped:/app/scraped:ro
+
+volumes:
+  postgres_data:
