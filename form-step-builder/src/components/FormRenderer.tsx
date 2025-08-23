@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -6,7 +6,7 @@ import { Checkbox } from './ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Alert, AlertDescription } from './ui/alert';
-import { useFormSchema, FormField } from '../hooks/useFormSchema';
+import { useFormSchema, FormField, FormStep } from '../hooks/useFormSchema';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { useToast } from '../hooks/use-toast';
 import { Loader2, CheckCircle, AlertCircle, Wifi } from 'lucide-react';
@@ -46,10 +46,19 @@ const FormRenderer: React.FC = () => {
     const errors: Record<string, string> = {};
     let isValid = true;
 
+    // Helper function to get nested field value
+    const getFieldValue = (fieldName: string) => {
+      if (fieldName.includes('.')) {
+        const [parentKey, childKey] = fieldName.split('.');
+        return formData[parentKey] ? formData[parentKey][childKey] : '';
+      }
+      return formData[fieldName];
+    };
+
     currentStepData.fields.forEach(field => {
       if (field.type === 'submit' || field.type === 'button') return;
 
-      const value = formData[field.name];
+      const value = getFieldValue(field.name);
       
       // Check required fields
       if (field.required && (!value || value === '')) {
@@ -65,6 +74,12 @@ const FormRenderer: React.FC = () => {
             errors[field.name] = 'Aadhaar number must be 12 digits';
           } else if (field.name === 'panNumber') {
             errors[field.name] = 'PAN must be in format: ABCDE1234F';
+          } else if (field.pattern === '^[0-9]{6}$') {
+            errors[field.name] = 'PIN Code must be 6 digits';
+          } else if (field.pattern === '^[0-9]{10}$') {
+            errors[field.name] = 'Mobile number must be 10 digits';
+          } else if (field.pattern.includes('@')) {
+            errors[field.name] = 'Please enter a valid email address';
           } else {
             errors[field.name] = `${field.label} format is invalid`;
           }
@@ -149,12 +164,28 @@ const FormRenderer: React.FC = () => {
   };
 
   // Render individual form field
+  // Render individual form field
   const renderField = (field: FormField) => {
     if (field.type === 'submit' || field.type === 'button') {
       return null; // Skip action buttons, we'll handle navigation separately
     }
 
-    const value = formData[field.name] || '';
+    // Skip any checkbox field that has "Type of Organisation" in its label
+    // This is the problematic field that should be a PAN declaration but has wrong labeling
+    if (field.type === 'checkbox' && field.label && field.label.includes('Type of Organisation')) {
+      return null;
+    }
+
+    // Helper function to get nested field value
+    const getFieldValue = (fieldName: string) => {
+      if (fieldName.includes('.')) {
+        const [parentKey, childKey] = fieldName.split('.');
+        return formData[parentKey] ? formData[parentKey][childKey] : '';
+      }
+      return formData[fieldName];
+    };
+
+    const value = getFieldValue(field.name) || '';
     const error = fieldErrors[field.name];
 
     switch (field.type) {
@@ -267,8 +298,8 @@ const FormRenderer: React.FC = () => {
     );
   }
 
-  const currentStepData = schema.steps[currentStep - 1];
-  const isLastStep = currentStep === schema.steps.length;
+  const currentStepData = schema?.steps[currentStep - 1];
+  const isLastStep = currentStep === (schema?.steps.length || 0);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -297,7 +328,7 @@ const FormRenderer: React.FC = () => {
         {/* Step Progress */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
-            {schema.steps.map((step, index) => (
+            {schema?.steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
                 <div className={`
                   w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
@@ -317,7 +348,7 @@ const FormRenderer: React.FC = () => {
                 <span className="ml-2 text-sm font-medium text-gray-700">
                   {step.title}
                 </span>
-                {index < schema.steps.length - 1 && (
+                {index < (schema?.steps.length || 0) - 1 && (
                   <div className="w-16 h-0.5 bg-gray-200 mx-4" />
                 )}
               </div>
@@ -385,8 +416,8 @@ const FormRenderer: React.FC = () => {
           <p>Ministry of MSME | Udyog Bhawan - New Delhi</p>
           <p className="mt-1">Email: champions@gov.in</p>
           <p className="mt-2 text-xs">
-            Form fields loaded from backend • {schema.meta.totalFields} fields • 
-            Scraped on {new Date(schema.meta.scrapedAt).toLocaleDateString()}
+            Form fields loaded from backend • {schema?.meta.totalFields} fields • 
+            Scraped on {new Date(schema?.meta.scrapedAt || '').toLocaleDateString()}
           </p>
         </div>
       </div>

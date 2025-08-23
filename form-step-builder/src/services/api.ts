@@ -211,37 +211,9 @@ export const convertToBackendFormat = (frontendData: Record<string, any>): Recor
         backendData.enterpriseName = backendData.entrepreneurName;
     }
 
-    // Add default values for required fields if missing
-    if (!backendData.socialCategory) {
-        backendData.socialCategory = 'General';
-    }
-    
-    if (!backendData.gender) {
-        backendData.gender = 'Male';
-    }
-
     // Ensure declaration is boolean and true
     if (backendData.declaration !== false) {
         backendData.declaration = true;
-    }
-
-    // Add mock nested objects if they don't exist
-    if (!backendData.officialAddress) {
-        backendData.officialAddress = {
-            state: 'Delhi',
-            district: 'New Delhi',
-            pinCode: '110001',
-            mobileNumber: '9999999999',
-            emailId: 'test@example.com'
-        };
-    }
-
-    if (!backendData.promoterDetails) {
-        backendData.promoterDetails = {
-            name: backendData.enterpriseName || 'Test Entrepreneur',
-            mobileNumber: '9999999999',
-            emailId: 'test@example.com'
-        };
     }
 
     return backendData;
